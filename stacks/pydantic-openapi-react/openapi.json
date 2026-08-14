@@ -1,0 +1,577 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Radiology Studies PoC",
+    "summary": "Pydantic models are the contract; TypeScript is generated downstream.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/studies": {
+      "get": {
+        "tags": [
+          "studies"
+        ],
+        "summary": "List Studies",
+        "description": "List studies, optionally filtered by modality.\n\nThe `modality` query param is a `str, Enum`, so the generated TS type is a\nliteral union \u2014 passing `\"PET\"` from the frontend is a compile error.",
+        "operationId": "listStudies",
+        "parameters": [
+          {
+            "name": "modality",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/Modality"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Filter by imaging modality.",
+              "title": "Modality"
+            },
+            "description": "Filter by imaging modality."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Study"
+                  },
+                  "title": "Response Liststudies"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/studies/{study_id}": {
+      "get": {
+        "tags": [
+          "studies"
+        ],
+        "summary": "Get Study",
+        "operationId": "getStudy",
+        "parameters": [
+          {
+            "name": "study_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Study Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Study"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such study.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/studies/{study_id}/report": {
+      "post": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "Create Report",
+        "description": "Attach a report to a study.\n\n`body` is a Pydantic model, so the TS call site's `body:` argument is\nchecked field by field against it.",
+        "operationId": "createReport",
+        "parameters": [
+          {
+            "name": "study_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Study Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Report"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such study.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Study is already reported.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "Get Report",
+        "operationId": "getReport",
+        "parameters": [
+          {
+            "name": "study_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Study Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Report"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such study.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/studies/{study_id}/report/draft": {
+      "put": {
+        "tags": [
+          "reports"
+        ],
+        "summary": "Save Draft",
+        "description": "Autosave a partially-filled report and echo back what was stored.\n\nThe same model on the way in and on the way out \u2014 see GOTCHA #1 in\n`models.py` for why that combination is what splits the schema.",
+        "operationId": "saveDraft",
+        "parameters": [
+          {
+            "name": "study_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Study Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReportDraft-Input"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportDraft-Output"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such study.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reset": {
+      "post": {
+        "tags": [
+          "demo"
+        ],
+        "summary": "Reset Demo",
+        "description": "Restore seed data so the demo can be replayed.",
+        "operationId": "resetDemo",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Study"
+                  },
+                  "type": "array",
+                  "title": "Response Resetdemo"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorOut": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorOut",
+        "description": "GOTCHA #5 \u2014 declared per-route in ``responses=`` so the TS error branch\nis narrowed instead of falling back to an untyped blob."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "Modality": {
+        "type": "string",
+        "enum": [
+          "CT",
+          "MR",
+          "XR",
+          "US"
+        ],
+        "title": "Modality",
+        "description": "GOTCHA #4 \u2014 inheriting ``str`` makes this a string literal union in TS.\n\nWithout the ``str`` base these land as opaque integers and the frontend\n``<select>`` loses all meaning."
+      },
+      "Report": {
+        "properties": {
+          "study_id": {
+            "type": "string",
+            "title": "Study Id"
+          },
+          "findings": {
+            "type": "string",
+            "title": "Findings"
+          },
+          "impression": {
+            "type": "string",
+            "title": "Impression"
+          },
+          "critical": {
+            "type": "boolean",
+            "title": "Critical",
+            "default": false
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "study_id",
+          "findings",
+          "impression",
+          "created_at"
+        ],
+        "title": "Report"
+      },
+      "ReportDraft-Input": {
+        "properties": {
+          "findings": {
+            "type": "string",
+            "title": "Findings",
+            "default": ""
+          },
+          "impression": {
+            "type": "string",
+            "title": "Impression",
+            "default": ""
+          },
+          "critical": {
+            "type": "boolean",
+            "title": "Critical",
+            "default": false
+          }
+        },
+        "type": "object",
+        "title": "ReportDraft",
+        "description": "An autosaved, partially-filled report \u2014 sent in, echoed back.\n\nGOTCHA #1 \u2014 and the PoC's one correction to the source doc.\n\nThe doc says a model with defaults splits into `FooInput`/`FooOutput`, and\nthat `separate_input_output_schemas=False` collapses it. On FastAPI 0.141 +\nPydantic 2.13, **neither half of that is still true**:\n\n* A plain default no longer splits anything. Pydantic 2.13 emits identical\n  validation and serialization schemas for `ReportIn` above, so there is\n  only ever one `ReportIn`.\n* What splits a model now is a genuine divergence between those two\n  schemas \u2014 here the `is_complete` computed field, which the server derives\n  and the client must never send.\n* And that split **ignores the flag**. See `fastapi/_compat/v2.py`:\n  `separate_input_output_schemas or _has_computed_fields(field)` \u2014 a\n  computed field forces separation either way. `just gotchas` proves it by\n  flipping the flag and showing the spec does not change.\n\nThe fix is therefore not a flag but a modelling decision: let the split\nstand and treat `-Input`/`-Output` as the two genuinely different shapes\nthey are, or drop the computed field and derive it client-side. This PoC\nlets it stand \u2014 see `docs/GOTCHAS.md`."
+      },
+      "ReportDraft-Output": {
+        "properties": {
+          "findings": {
+            "type": "string",
+            "title": "Findings",
+            "default": ""
+          },
+          "impression": {
+            "type": "string",
+            "title": "Impression",
+            "default": ""
+          },
+          "critical": {
+            "type": "boolean",
+            "title": "Critical",
+            "default": false
+          },
+          "is_complete": {
+            "type": "boolean",
+            "title": "Is Complete",
+            "description": "Server-derived: output-only, never part of the request.",
+            "readOnly": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "is_complete"
+        ],
+        "title": "ReportDraft",
+        "description": "An autosaved, partially-filled report \u2014 sent in, echoed back.\n\nGOTCHA #1 \u2014 and the PoC's one correction to the source doc.\n\nThe doc says a model with defaults splits into `FooInput`/`FooOutput`, and\nthat `separate_input_output_schemas=False` collapses it. On FastAPI 0.141 +\nPydantic 2.13, **neither half of that is still true**:\n\n* A plain default no longer splits anything. Pydantic 2.13 emits identical\n  validation and serialization schemas for `ReportIn` above, so there is\n  only ever one `ReportIn`.\n* What splits a model now is a genuine divergence between those two\n  schemas \u2014 here the `is_complete` computed field, which the server derives\n  and the client must never send.\n* And that split **ignores the flag**. See `fastapi/_compat/v2.py`:\n  `separate_input_output_schemas or _has_computed_fields(field)` \u2014 a\n  computed field forces separation either way. `just gotchas` proves it by\n  flipping the flag and showing the spec does not change.\n\nThe fix is therefore not a flag but a modelling decision: let the split\nstand and treat `-Input`/`-Output` as the two genuinely different shapes\nthey are, or drop the computed field and derive it client-side. This PoC\nlets it stand \u2014 see `docs/GOTCHAS.md`."
+      },
+      "ReportIn": {
+        "properties": {
+          "findings": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Findings",
+            "description": "What was seen."
+          },
+          "impression": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Impression",
+            "description": "What it means."
+          },
+          "critical": {
+            "type": "boolean",
+            "title": "Critical",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "findings",
+          "impression"
+        ],
+        "title": "ReportIn",
+        "description": "The request body. Type-checked against the TS call site."
+      },
+      "Study": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "patient_name": {
+            "type": "string",
+            "title": "Patient Name"
+          },
+          "modality": {
+            "$ref": "#/components/schemas/Modality"
+          },
+          "body_part": {
+            "type": "string",
+            "title": "Body Part"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StudyStatus"
+          },
+          "acquired_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Acquired At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "patient_name",
+          "modality",
+          "body_part",
+          "status",
+          "acquired_at"
+        ],
+        "title": "Study"
+      },
+      "StudyStatus": {
+        "type": "string",
+        "enum": [
+          "pending",
+          "reported"
+        ],
+        "title": "StudyStatus"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

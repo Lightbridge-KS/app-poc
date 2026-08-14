@@ -1,0 +1,41 @@
+name: dash-python-docker-poc
+
+services:
+  # Production-shaped: gunicorn, code baked into the image, no bind mounts.
+  # 4 workers is only safe because Dash callbacks are stateless HTTP POSTs —
+  # there is no in-process session to pin a client to.
+  app:
+    build:
+      context: .
+      target: runtime
+    image: dash-docker-poc:latest
+    ports:
+      - "8050:8050"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8050/_dash-layout').read()
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      # Importing polars and building the initial figures is slower to boot than
+      # bare Dash was; 10s was tight enough to flap.
+      start_period: 30s
+
+  # Dev loop: same image, source bind-mounted. `docker compose --profile dev up dev`
+  # Runs Werkzeug via `python app/app.py` (debug=True) rather than gunicorn —
+  # gunicorn has no reloader, so hot reload is impossible under it.
+  dev:
+    profiles: ["dev"]
+    build:
+      context: .
+      target: runtime
+    image: dash-docker-poc:latest
+    ports:
+      - "8051:8050"
+    volumes:
+      - ./app:/app/app:ro
+    command: ["python", "app/app.py"]

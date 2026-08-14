@@ -1,0 +1,40 @@
+default:
+    @just --list
+
+# Build the image
+build:
+    docker compose build
+
+# Start the production-shaped service on :8000
+up:
+    docker compose up -d
+    @just wait
+
+# Block until the app container reports healthy
+wait:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    for i in $(seq 1 30); do
+        status=$(docker compose ps --format json app \
+            | jq -r 'select(.Service == "app") | .Health')
+        [ "$status" = healthy ] && { echo "app: healthy"; exit 0; }
+        sleep 2
+    done
+    echo "app: never became healthy (last status: ${status:-unknown})" >&2
+    exit 1
+
+# Start the hot-reload dev service on :8001
+dev:
+    docker compose --profile dev up -d dev
+
+# HTTP smoke test against the running app
+smoke:
+    @printf 'GET / -> '
+    @curl -sS -o /dev/null -w '%{http_code}\n' http://localhost:8000/
+
+logs:
+    docker compose logs -f
+
+# Stop everything, including the dev profile
+down:
+    docker compose --profile dev down

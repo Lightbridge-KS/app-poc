@@ -1,0 +1,17 @@
+[project]
+name = "dash-docker-poc"
+version = "0.1.0"
+description = "Interactive Palmer Penguins EDA dashboard in Dash, under Docker Compose"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dash>=4.4.1",
+    # Layout primitives only; its sole dependency is dash itself. The Bootstrap
+    # CSS is vendored in app/assets/ so the page styles without a CDN.
+    "dash-bootstrap-components>=2.0.4",
+    # plotly.graph_objects is self-contained. plotly.express would additionally
+    # need numpy and pandas here — neither is a plotly dependency. See README.
+    "plotly>=6.0.0",
+    "polars>=1.43.2",
+    "gunicorn>=23.0.0",
+]

@@ -1,0 +1,41 @@
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "gen:types": "openapi-typescript ../openapi.json -o src/api/schema.d.ts",
+    "gen:orval": "orval --config orval.config.ts",
+    "gen": "npm run gen:types && npm run gen:orval",
+    "//check": "tsc -b --force, not `tsc --noEmit`: the root tsconfig has files:[] and project references, so a bare --noEmit silently checks nothing and would make this PoC's central claim untestable.",
+    "check": "tsc -b --force"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.101.4",
+    "openapi-fetch": "^0.17.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^10.5.0",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "msw": "^2.15.0",
+    "openapi-typescript": "^7.13.0",
+    "orval": "^8.24.0",
+    "oxlint": "^1.75.0",
+    "typescript": "~5.9.3",
+    "vite": "^8.2.0"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
+  }
+}

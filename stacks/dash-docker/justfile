@@ -1,0 +1,120 @@
+default:
+    @just --list
+
+# The `update_views` callback signature, as published at /_dash-dependencies.
+# Not hand-written: read it back with `just deps` if the callback ever changes.
+views_out := '..n_penguins.children...n_species.children...mean_mass.children...selection_note.children...mass_hist.figure...flipper_box.figure...summary_table.data...summary_table.columns...rows_table.data...rows_table.columns...empty_notice.children...worker_note.children..'
+
+# Build the image
+build:
+    docker compose build
+
+# Start the production-shaped service on :8050
+up:
+    docker compose up -d
+    @just wait
+
+# Block until the app container reports healthy
+wait:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    for i in $(seq 1 45); do
+        status=$(docker compose ps --format json app \
+            | jq -r 'select(.Service == "app") | .Health')
+        [ "$status" = healthy ] && { echo "app: healthy"; exit 0; }
+        sleep 2
+    done
+    echo "app: never became healthy (last status: ${status:-unknown})" >&2
+    exit 1
+
+# HTTP smoke test: the port is open, Dash initialized, assets served locally
+smoke:
+    @printf 'GET /                        -> '
+    @curl -sS -o /dev/null -w '%{http_code}\n' http://localhost:8050/
+    @printf 'GET /_dash-layout            -> '
+    @curl -sS -o /dev/null -w '%{http_code}\n' http://localhost:8050/_dash-layout
+    @printf 'GET /assets/bootstrap.min.css -> '
+    @curl -sS -o /dev/null -w '%{http_code} (%{size_download} bytes, no CDN)\n' http://localhost:8050/assets/bootstrap.min.css
+
+# What the app says its callbacks look like — the source of the payloads below
+deps:
+    @curl -sS http://localhost:8050/_dash-dependencies | jq -c '.[] | {output, inputs: [.inputs[] | "\(.id).\(.property)"]}'
+
+# POST the `update_views` callback. sel is a JSON array of row_ids, or null.
+# Internal: `prove`, `brush` and `workers` all go through here.
+_views species='["Adelie","Chinstrap","Gentoo"]' sel='null':
+    #!/usr/bin/env bash
+    set -euo pipefail
+    jq -n --argjson species '{{ species }}' --argjson sel '{{ sel }}' --arg out '{{ views_out }}' '
+    { output: $out,
+      outputs: [ {id:"n_penguins",property:"children"},{id:"n_species",property:"children"},
+                 {id:"mean_mass",property:"children"},{id:"selection_note",property:"children"},
+                 {id:"mass_hist",property:"figure"},{id:"flipper_box",property:"figure"},
+                 {id:"summary_table",property:"data"},{id:"summary_table",property:"columns"},
+                 {id:"rows_table",property:"data"},{id:"rows_table",property:"columns"},
+                 {id:"empty_notice",property:"children"},{id:"worker_note",property:"children"} ],
+      inputs: [ {id:"species",property:"value",value:$species},
+                {id:"islands",property:"value",value:["Biscoe","Dream","Torgersen"]},
+                {id:"mass",property:"value",value:[2700,6300]},
+                {id:"drop_incomplete",property:"value",value:false},
+                {id:"bins",property:"value",value:25},
+                {id:"bill_scatter",property:"selectedData",
+                 value: (if $sel == null then null
+                         else {points: [ $sel[] | {customdata: [., "x", "y", 0]} ]} end)} ],
+      changedPropIds: ["species.value"] }' \
+    | curl -sS -X POST http://localhost:8050/_dash-update-component \
+        -H 'Content-Type: application/json' -d @-
+
+# The dashboard actually computing: drive the sidebar callback and read back
+# the value boxes and the per-species summary the container calculated.
+prove species='["Adelie","Chinstrap","Gentoo"]':
+    @just _views '{{ species }}' null | jq '{penguins: .response.n_penguins.children, species: .response.n_species.children, mean_mass: .response.mean_mass.children, summary: [.response.summary_table.data[] | {Species, n}], rows_in_table: (.response.rows_table.data | length)}'
+
+# Cross-filtering, proved without a browser: brush a known set of row_ids and
+# watch the value boxes, summary and both remaining plots narrow to just those.
+brush sel='[0,1,2,4,5,6,7,8,9,10,152,153,154,155,156]':
+    @just _views '["Adelie","Chinstrap","Gentoo"]' '{{ sel }}' | jq '{penguins: .response.n_penguins.children, species: .response.n_species.children, badge: .response.selection_note.children.props.children, summary: [.response.summary_table.data[] | {Species, n}], rows_in_table: (.response.rows_table.data | length), hist_traces: [.response.mass_hist.figure.data[] | {name, n: (.x|length)}], box_traces: [.response.flipper_box.figure.data[] | {name, n: (.y|length)}]}'
+
+# Multi-worker proof: fire N concurrent cross-filtered callbacks and collect the
+# worker PIDs. Several distinct PIDs + one identical answer == stateless. The
+# brush makes the point sharper: selection state rides in the request body, so
+# no worker has to remember anything about the client.
+workers count='20':
+    #!/usr/bin/env bash
+    set -euo pipefail
+    hit() { just _views '["Adelie","Chinstrap","Gentoo"]' '[0,1,2,4,5,6,7,8,9,10,152,153,154,155,156]' \
+              | jq -r '"\(.response.n_penguins.children) penguins / \(.response.n_species.children) species | \(.response.worker_note.children)"'; }
+    export -f hit
+    out=$(seq {{ count }} | xargs -P 8 -I_ bash -c hit)
+    echo "workers that served the {{ count }} concurrent brushed requests:"
+    grep -oE 'pid [0-9]+' <<<"$out" | sort | uniq -c
+    echo "distinct answers (must be exactly one — the brush selects 15 of 342):"
+    sed -E 's/ \| served by worker pid [0-9]+//' <<<"$out" | sort | uniq -c
+
+# Render the three figures to a standalone, self-contained HTML file. Useful for
+# eyeballing the plots (or sharing them) without driving the whole dashboard.
+preview out='_preview_plots.html':
+    #!/usr/bin/env bash
+    set -euo pipefail
+    docker compose exec -T -w /app/app app python -c "
+    import penguins as pg, plots, plotly.io as pio
+    f = pg.filter_penguins(pg.PENGUINS, species=pg.SPECIES, islands=pg.ISLANDS, mass_range=pg.MASS_RANGE)
+    figs = [plots.bill_scatter(f, smoother=True), plots.mass_histogram(f, bins=25), plots.flipper_box(f)]
+    parts = [pio.to_html(g, include_plotlyjs=(i==0), full_html=False, config={'displaylogo': False}) for i, g in enumerate(figs)]
+    open('/tmp/preview.html','w').write('<html><head><meta charset=\"utf-8\"><title>Penguins plots</title>'
+        '<style>body{font-family:system-ui;max-width:1100px;margin:2rem auto;padding:0 1rem}</style>'
+        '</head><body><h1>Palmer Penguins — interactive figures</h1>' + ''.join(parts) + '</body></html>')
+    "
+    docker compose cp app:/tmp/preview.html ./{{ out }}
+    echo "wrote {{ out }} — open it in a browser"
+
+# Start the hot-reload dev service on :8051
+dev:
+    docker compose --profile dev up -d dev
+
+logs:
+    docker compose logs -f
+
+# Stop everything, including the dev profile
+down:
+    docker compose --profile dev down

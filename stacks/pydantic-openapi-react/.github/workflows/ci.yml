@@ -1,0 +1,65 @@
+# The anti-drift gate, as it would run in CI.
+#
+# Nothing here is pushed anywhere — this file exists so the enforcement story is
+# concrete rather than theoretical. `just gate` runs the same checks locally and
+# is the one you'll actually use day to day; this version uses the doc's literal
+# `git diff --exit-code` form, which is available in CI because CI always has git.
+#
+# Since this stack moved under `stacks/` in the app-poc monorepo, GitHub will NOT
+# pick this file up — workflows only run from a repo-root `.github/workflows/`.
+# It stays here as the stack's own documentation; its paths are relative to this
+# stack directory, so promoting it to the repo root means prefixing every
+# `working-directory` and `git diff` path with `stacks/pydantic-openapi-react/`.
+name: contract
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  no-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: astral-sh/setup-uv@v7
+        with:
+          working-directory: backend
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - run: uv sync
+        working-directory: backend
+      - run: npm ci
+        working-directory: frontend
+
+      # 1. The spec must match the Pydantic models.
+      - name: Export the contract
+        run: uv run python scripts/export_openapi.py
+        working-directory: backend
+      - name: Fail if openapi.json is stale
+        run: |
+          git diff --exit-code openapi.json || {
+            echo "::error::OpenAPI changed — run 'just gen' and commit the result"
+            exit 1
+          }
+
+      # 2. The generated clients must match the spec.
+      - name: Regenerate clients
+        run: npm run gen
+        working-directory: frontend
+      - name: Fail if generated clients are stale
+        run: |
+          git diff --exit-code frontend/src/api || {
+            echo "::error::Generated client changed — run 'just gen' and commit the result"
+            exit 1
+          }
+
+      # 3. The app must still compile against the contract.
+      #    `tsc -b`, not `tsc --noEmit`: the root tsconfig uses project
+      #    references, so a bare --noEmit checks nothing at all.
+      - name: Typecheck
+        run: npm run check
+        working-directory: frontend

@@ -1,0 +1,20 @@
+.DS_Store
+
+# Agent harness scratch
+.claude/.cc-writes/
+
+# Playground (see user conventions) — repo-local, never committed
+_playground/
+
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.venv
+.pytest_cache/
+
+# Node
+node_modules/

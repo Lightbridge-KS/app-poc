@@ -1,0 +1,83 @@
+# PoC: OpenAPI as the contract, generated from Pydantic.
+# Polyglot repo, so `just` is the runner; each half keeps its native tooling.
+
+backend := justfile_directory() / "backend"
+frontend := justfile_directory() / "frontend"
+spec := justfile_directory() / "openapi.json"
+
+default:
+    @just --list --unsorted
+
+# Install both halves.
+setup:
+    cd {{backend}} && uv sync
+    cd {{frontend}} && npm install
+
+# Pydantic ──▶ openapi.json ──▶ schema.d.ts + orval SDK. The whole pipeline.
+gen: spec
+    cd {{frontend}} && npm run gen
+
+# Just the spec — no server booted, imports the app and calls app.openapi().
+spec:
+    cd {{backend}} && uv run python scripts/export_openapi.py
+
+# The claim under test: does the frontend still compile against the contract?
+check:
+    cd {{frontend}} && npm run check
+
+# Run both halves. Ctrl-C stops them together.
+dev:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    trap 'kill 0' EXIT INT TERM
+    cd {{backend}} && uv run uvicorn app.main:app --reload --port 8000 &
+    cd {{frontend}} && npm run dev &
+    wait
+
+api:
+    cd {{backend}} && uv run uvicorn app.main:app --reload --port 8000
+
+web:
+    cd {{frontend}} && npm run dev
+
+# Serve the whole app from orval's generated MSW mocks — no Python at all.
+web-mock:
+    cd {{frontend}} && VITE_MOCK=1 npm run dev
+
+# The part people skip: fail if the committed artifacts are stale.
+# Deliberately git-free — regenerates into a temp dir and diffs, so it behaves
+# the same here as it does in CI.
+gate:
+    #!/usr/bin/env bash
+    set -euo pipefail
+    tmp="$(mktemp -d)"
+    trap 'rm -rf "$tmp"' EXIT
+
+    cd {{backend}} && uv run python scripts/export_openapi.py "$tmp/openapi.json" >/dev/null
+    if ! diff -q {{spec}} "$tmp/openapi.json" >/dev/null; then
+        echo "✗ openapi.json is stale — the Python models changed. Run: just gen"
+        diff -u {{spec}} "$tmp/openapi.json" | head -40
+        exit 1
+    fi
+    echo "✓ openapi.json matches the models"
+
+    cd {{frontend}} && npx openapi-typescript {{spec}} -o "$tmp/schema.d.ts" >/dev/null 2>&1
+    if ! diff -q src/api/schema.d.ts "$tmp/schema.d.ts" >/dev/null; then
+        echo "✗ schema.d.ts is stale — regenerate it. Run: just gen"
+        exit 1
+    fi
+    echo "✓ schema.d.ts matches the spec"
+
+    npm run check --silent
+    echo "✓ frontend compiles against the contract"
+
+# The payoff: break the backend, watch the frontend build fail, put it back.
+drift-demo:
+    @bash {{justfile_directory()}}/scripts/drift_demo.sh
+
+# Show which of the doc's OpenAPI-shaping flags still do anything.
+gotchas:
+    @bash {{justfile_directory()}}/scripts/gotchas.sh
+
+clean:
+    rm -rf {{frontend}}/node_modules {{backend}}/.venv

@@ -1,0 +1,9 @@
+.DS_Store
+_playground/
+
+# Deliberately NOT ignored — these are the committed artifacts the whole
+# anti-drift gate depends on. If they aren't in the repo, CI has nothing to
+# diff against and the contract stops being enforced:
+#   openapi.json
+#   frontend/src/api/schema.d.ts
+#   frontend/src/api/orval/

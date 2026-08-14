@@ -1,0 +1,13 @@
+.git
+.gitignore
+.claude
+.venv
+__pycache__/
+*.py[oc]
+*.egg-info
+.python-version
+README.md
+justfile
+compose.yaml
+Dockerfile
+.dockerignore

@@ -1,0 +1,50 @@
+name: shiny-python-docker-poc
+
+services:
+  # Production-shaped: code baked into the image, no bind mounts, healthchecked.
+  app:
+    build:
+      context: .
+      target: runtime
+    image: shiny-docker-poc:latest
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/').read()
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      # Matches the Dockerfile: the scientific-stack import is slow to start.
+      start_period: 30s
+
+  # Dev loop: same image, source bind-mounted and watched. `docker compose --profile dev up dev`
+  dev:
+    profiles: ["dev"]
+    build:
+      context: .
+      target: runtime
+    image: shiny-docker-poc:latest
+    ports:
+      - "8001:8000"
+      # Autoreload socket the browser connects to for the "refresh me" signal.
+      # Without publishing it, server-side reload still works but the open page
+      # will not refresh itself.
+      - "8765:8765"
+    volumes:
+      - ./app:/app/app:ro
+    command:
+      - shiny
+      - run
+      - --reload
+      - --autoreload-port
+      - "8765"
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - app/app.py
