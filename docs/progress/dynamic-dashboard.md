@@ -21,7 +21,7 @@ PlotSpec → server transforms → Plotly card in a grid.
 - [x] `just prove`: consistency N=5 per prompt, out-of-catalog refusal
 - [ ] Browser E2E via Chrome automation, screenshot — **blocked 2026-09-03**: extension returned an error page for `localhost`; recorded as the stack's ⚠️ Not verified gap
 - [x] Docs: stack README (contract), design doc, root README + PROOF rows, AGENTS.md amendments, excalidraw retrofit
-- [ ] PR
+- [x] PR — https://github.com/Lightbridge-KS/app-poc/pull/1 (draft, `b136775`)
 
 ## Next
 
