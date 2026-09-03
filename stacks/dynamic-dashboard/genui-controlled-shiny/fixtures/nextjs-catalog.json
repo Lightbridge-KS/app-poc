@@ -1,0 +1,523 @@
+[
+  {
+    "name": "scatter_plot",
+    "description": "Add a scatter plot card to the dashboard: one numeric column against another, optionally coloured by a category.",
+    "inputSchema": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "dataset": {
+              "type": "string",
+              "const": "penguins",
+              "description": "Palmer Penguins — 344 penguins, 3 species, 3 islands (2007–2009)"
+            },
+            "x": {
+              "type": "string",
+              "enum": [
+                "bill_length_mm",
+                "bill_depth_mm",
+                "flipper_length_mm",
+                "body_mass_g",
+                "year"
+              ]
+            },
+            "y": {
+              "type": "string",
+              "enum": [
+                "bill_length_mm",
+                "bill_depth_mm",
+                "flipper_length_mm",
+                "body_mass_g",
+                "year"
+              ]
+            },
+            "color": {
+              "description": "Colour points by this category",
+              "type": "string",
+              "enum": [
+                "species",
+                "island",
+                "sex"
+              ]
+            },
+            "filter": {
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "column": {
+                    "type": "string",
+                    "enum": [
+                      "bill_length_mm",
+                      "bill_depth_mm",
+                      "flipper_length_mm",
+                      "body_mass_g",
+                      "year",
+                      "species",
+                      "island",
+                      "sex"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "==",
+                      "!=",
+                      ">",
+                      ">=",
+                      "<",
+                      "<=",
+                      "in"
+                    ],
+                    "description": "'in' takes a string[] value; the rest take a scalar"
+                  },
+                  "value": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "minItems": 1,
+                        "maxItems": 10,
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "column",
+                  "op",
+                  "value"
+                ],
+                "additionalProperties": false,
+                "description": "One row filter; filters are ANDed"
+              }
+            }
+          },
+          "required": [
+            "dataset",
+            "x",
+            "y"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataset": {
+              "type": "string",
+              "const": "mtcars",
+              "description": "Motor Trend cars (1974) — 32 cars, fuel economy and design"
+            },
+            "x": {
+              "type": "string",
+              "enum": [
+                "mpg",
+                "disp",
+                "hp",
+                "drat",
+                "wt",
+                "qsec"
+              ]
+            },
+            "y": {
+              "type": "string",
+              "enum": [
+                "mpg",
+                "disp",
+                "hp",
+                "drat",
+                "wt",
+                "qsec"
+              ]
+            },
+            "color": {
+              "description": "Colour points by this category",
+              "type": "string",
+              "enum": [
+                "cyl",
+                "vs",
+                "am",
+                "gear",
+                "carb"
+              ]
+            },
+            "filter": {
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "column": {
+                    "type": "string",
+                    "enum": [
+                      "mpg",
+                      "disp",
+                      "hp",
+                      "drat",
+                      "wt",
+                      "qsec",
+                      "cyl",
+                      "vs",
+                      "am",
+                      "gear",
+                      "carb"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "==",
+                      "!=",
+                      ">",
+                      ">=",
+                      "<",
+                      "<=",
+                      "in"
+                    ],
+                    "description": "'in' takes a string[] value; the rest take a scalar"
+                  },
+                  "value": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "minItems": 1,
+                        "maxItems": 10,
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "column",
+                  "op",
+                  "value"
+                ],
+                "additionalProperties": false,
+                "description": "One row filter; filters are ANDed"
+              }
+            }
+          },
+          "required": [
+            "dataset",
+            "x",
+            "y"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "bar_plot",
+    "description": "Add a bar plot card to the dashboard: one bar per category level, height = row count or mean/median of a numeric column.",
+    "inputSchema": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "dataset": {
+              "type": "string",
+              "const": "penguins",
+              "description": "Palmer Penguins — 344 penguins, 3 species, 3 islands (2007–2009)"
+            },
+            "by": {
+              "type": "string",
+              "enum": [
+                "species",
+                "island",
+                "sex"
+              ],
+              "description": "One bar per level of this column"
+            },
+            "measure": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "const": "count"
+                    }
+                  },
+                  "required": [
+                    "op"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "enum": [
+                        "mean",
+                        "median"
+                      ]
+                    },
+                    "column": {
+                      "type": "string",
+                      "enum": [
+                        "bill_length_mm",
+                        "bill_depth_mm",
+                        "flipper_length_mm",
+                        "body_mass_g",
+                        "year"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "op",
+                    "column"
+                  ],
+                  "additionalProperties": false
+                }
+              ],
+              "description": "Bar height: row count, or mean/median of a numeric column"
+            },
+            "color": {
+              "description": "Split each bar by this category (grouped bars)",
+              "type": "string",
+              "enum": [
+                "species",
+                "island",
+                "sex"
+              ]
+            },
+            "filter": {
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "column": {
+                    "type": "string",
+                    "enum": [
+                      "bill_length_mm",
+                      "bill_depth_mm",
+                      "flipper_length_mm",
+                      "body_mass_g",
+                      "year",
+                      "species",
+                      "island",
+                      "sex"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "==",
+                      "!=",
+                      ">",
+                      ">=",
+                      "<",
+                      "<=",
+                      "in"
+                    ],
+                    "description": "'in' takes a string[] value; the rest take a scalar"
+                  },
+                  "value": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "minItems": 1,
+                        "maxItems": 10,
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "column",
+                  "op",
+                  "value"
+                ],
+                "additionalProperties": false,
+                "description": "One row filter; filters are ANDed"
+              }
+            }
+          },
+          "required": [
+            "dataset",
+            "by",
+            "measure"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "dataset": {
+              "type": "string",
+              "const": "mtcars",
+              "description": "Motor Trend cars (1974) — 32 cars, fuel economy and design"
+            },
+            "by": {
+              "type": "string",
+              "enum": [
+                "cyl",
+                "vs",
+                "am",
+                "gear",
+                "carb"
+              ],
+              "description": "One bar per level of this column"
+            },
+            "measure": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "const": "count"
+                    }
+                  },
+                  "required": [
+                    "op"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "enum": [
+                        "mean",
+                        "median"
+                      ]
+                    },
+                    "column": {
+                      "type": "string",
+                      "enum": [
+                        "mpg",
+                        "disp",
+                        "hp",
+                        "drat",
+                        "wt",
+                        "qsec"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "op",
+                    "column"
+                  ],
+                  "additionalProperties": false
+                }
+              ],
+              "description": "Bar height: row count, or mean/median of a numeric column"
+            },
+            "color": {
+              "description": "Split each bar by this category (grouped bars)",
+              "type": "string",
+              "enum": [
+                "cyl",
+                "vs",
+                "am",
+                "gear",
+                "carb"
+              ]
+            },
+            "filter": {
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "column": {
+                    "type": "string",
+                    "enum": [
+                      "mpg",
+                      "disp",
+                      "hp",
+                      "drat",
+                      "wt",
+                      "qsec",
+                      "cyl",
+                      "vs",
+                      "am",
+                      "gear",
+                      "carb"
+                    ]
+                  },
+                  "op": {
+                    "type": "string",
+                    "enum": [
+                      "==",
+                      "!=",
+                      ">",
+                      ">=",
+                      "<",
+                      "<=",
+                      "in"
+                    ],
+                    "description": "'in' takes a string[] value; the rest take a scalar"
+                  },
+                  "value": {
+                    "anyOf": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "minItems": 1,
+                        "maxItems": 10,
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "column",
+                  "op",
+                  "value"
+                ],
+                "additionalProperties": false,
+                "description": "One row filter; filters are ANDed"
+              }
+            }
+          },
+          "required": [
+            "dataset",
+            "by",
+            "measure"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+]

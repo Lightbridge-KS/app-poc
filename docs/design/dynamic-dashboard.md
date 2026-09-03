@@ -20,7 +20,7 @@ determinism, safety, and expressiveness?
                          │  PlotSpec = the catalog contract (Zod / Pydantic)
                     ┌────┴──────────────────────────┐
                     │ LLM tool call   genui-controlled-nextjs  (built)
-                    │ LLM tool call   genui-controlled-shiny   (planned)
+                    │ LLM tool call   genui-controlled-shiny   (built)
                     │ YAML file       config-driven-shiny      (built)
                     │ layout JSON     declarative tier         (deferred)
                     └───────────────────────────────┘
@@ -100,9 +100,25 @@ No other slot exists; the model cannot place, size, or reorder anything.
 | variant | who fills PlotSpec | transform freedom | layout freedom | what it buys down |
 |---|---|---|---|---|
 | genui-controlled-nextjs | LLM, tool call | whitelisted ops | none | can an LLM drive a Controlled surface *consistently*? |
-| genui-controlled-shiny | LLM, structured output | whitelisted ops | none | same question, Python stack (Pydantic as the contract) |
+| genui-controlled-shiny | LLM, chatlas tool call, seeded from the YAML | whitelisted ops | file's `columns`; chat appends | same question in Python. **Built**: tool choice 20/20, validated specs 20/20 identical in run B (one x/y swap on "vs" in 2/5 in run A), refusals 3/3, majority specs 4/4 equal to the nextjs Run-2 specs. |
 | config-driven-shiny | YAML file | whitelisted ops | `columns: 1\|2`, card order, human `title` per card | is the PlotSpec a good *human* authoring surface with no LLM at all? **Built**: 4/4 outputs equal the nextjs stack's, Pydantic and Zod vocabularies identical, bad cards fail in place. |
 | declarative (deferred) | LLM, layout JSON | whitelisted ops | templates + slots | how much composition can be handed over before drift bites? |
+
+## What the three stacks measured (2026-09-03)
+
+| | genui-controlled-nextjs | config-driven-shiny | genui-controlled-shiny |
+|---|---|---|---|
+| filler | LLM tool call (AI SDK) | YAML file | LLM tool call (chatlas) |
+| tool choice | 20/20 | — | 20/20 |
+| identical specs | 20/20 once `title` removed | 4/4 equal to nextjs outputs | 20/20 (run B); 18/20 (run A, x/y swap on "vs") |
+| refusals | 3/3 | 4 bad cards → 4 teaching errors | 3/3 |
+| cross-stack | — | outputs ≡ nextjs, vocabulary ≡ Zod | specs ≡ nextjs Run 2, 4/4 |
+| median turn | 1.6–2.2 s | n/a | 3.5–4.5 s (chatlas adds a closing-text call) |
+
+The contract survives two languages, two SDKs and a human filler unchanged. The SDK
+defaults do not: chatlas ships tools `strict`, and OpenAI strict mode rejects a union at
+the root, so the identical schema needed `strict=False` and three keyword edits to be
+accepted where the AI SDK sent it as-is.
 
 ## Card vs PlotSpec (settled 2026-09-03, config-driven-shiny)
 
