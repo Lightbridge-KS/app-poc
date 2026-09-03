@@ -44,7 +44,7 @@ Chat pane on the Python catalog; grid seeded from cards.yaml; chatlas tool calls
 - [x] `dashboard.py`: seed + chat; cards synced on stream success; missing key is a message
 - [x] `just check` 6/6 · `just prove` run A + run B pasted · browser pass, two screenshots
 - [x] Docs: README, design doc (measured table), root README + PROOF rows, sketch
-- [ ] PR
+- [x] PR — https://github.com/Lightbridge-KS/app-poc/pull/3 (draft)
 
 ## Next
 
