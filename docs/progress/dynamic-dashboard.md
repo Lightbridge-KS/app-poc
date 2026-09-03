@@ -5,7 +5,7 @@ read_when: Starting or resuming work on any stacks/dynamic-dashboard/* stack; ch
 
 # dynamic-dashboard — progress
 
-Design: [`docs/design/dynamic-dashboard.md`](../design/dynamic-dashboard.md) ·
+Design: [`docs/design/dynamic-dashboard.md`](../design/dynamic-dashboard.md) · Retrospective: [`docs/design/dynamic-dashboard-retrospective.md`](../design/dynamic-dashboard-retrospective.md) ·
 Concept sketch: [`docs/ideas/dynamic-dashboard/concept.excalidraw`](../ideas/dynamic-dashboard/concept.excalidraw) ·
 Decisions record: `~/.lightbridge/projects/-Users-kittipos-my_poc-app_poc/asks/2026-09-03_1725_dynamic-dashboard-genui-controlled-design-decisions.md`
 
@@ -48,6 +48,7 @@ Chat pane on the Python catalog; grid seeded from cards.yaml; chatlas tool calls
 
 ## Next
 
+- Retrospective drafted 2026-09-03 (`docs/design/dynamic-dashboard-retrospective.md`); 💡 claims await KS's review.
 - "Save this dashboard": write chat cards back to cards.yaml (closes the loop between the two fillers).
 
 ## Deferred

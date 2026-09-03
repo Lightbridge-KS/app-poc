@@ -127,6 +127,11 @@ what the *filler* is trusted with: `kind` (explicit, since a file has no tool ca
 for human fillers only, an optional `title`. The LLM tier never gets `title`; the file
 tier does. The equivalence and contract checks compare PlotSpecs, never Cards.
 
+## Retrospective
+
+The reading of the three stacks' evidence — what held, what broke, what it implies for the
+next tier and a real project — is [`dynamic-dashboard-retrospective.md`](dynamic-dashboard-retrospective.md).
+
 ## Open questions
 
 - 💡 Refusal as text vs a typed `decline` tool (typed = machine-checkable, but a third catalog entry).
