@@ -19,7 +19,7 @@ PlotSpec → server transforms → Plotly card in a grid.
 - [x] Route + UI: `/api/chat`, ChatRail, CardGrid, PlotCard
 - [x] `just catalog` (JSON Schema of the tools)
 - [x] `just prove`: consistency N=5 per prompt, out-of-catalog refusal
-- [x] Browser E2E — closed **by hand** 2026-09-03: KS typed prompts and watched cards render after PR #1 merged. Automated form still open (extension returned an error page for `localhost` in the build session); stays in the stack's ⚠️ Not verified.
+- [x] Browser E2E via Chrome automation, screenshot — 2026-09-03, second attempt: the first failed because the MCP session was driving a *remote Linux* Chrome (Browser 2), not this Mac; `select_browser` fixed it. Two cards asserted, `docs/screenshot.jpg` saved, two layout bugs found + fixed. KS had also verified by hand after PR #1.
 - [x] Docs: stack README (contract), design doc, root README + PROOF rows, AGENTS.md amendments, excalidraw retrofit
 - [x] PR — https://github.com/Lightbridge-KS/app-poc/pull/1 (draft, `b136775`)
 
@@ -35,6 +35,8 @@ PlotSpec → server transforms → Plotly card in a grid.
 - Declarative tier (LLM emits a whole dashboard layout against the catalog).
 
 ## Confirmed contracts
+
+- **HTTP evidence cannot see layout.** The browser pass found a CSS-grid overflow (Plotly canvas widening a `1fr` track) and a legend/axis collision that `just prove` was blind to. Every dashboard stack needs one browser pass.
 
 - **No free-text prop in a PlotSpec.** Run 1 of `just prove` (2026-09-03): with an optional `title`, it was the only field that drifted (2/4 intents). Run 2 without it: 20/20 identical. Copy is derived from the spec on the client.
 - `gpt-5.6-terra` at `reasoningEffort: low` accepts a `oneOf`-rooted (discriminated-union) tool schema and picks the right tool 20/20 on the four intents.

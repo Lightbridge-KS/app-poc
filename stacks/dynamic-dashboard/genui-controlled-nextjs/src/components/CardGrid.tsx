@@ -46,7 +46,7 @@ export function CardGrid({
     );
   }
   return (
-    <main className="overflow-y-auto p-4">
+    <main className="min-w-0 overflow-y-auto p-4">
       <div className="grid grid-cols-1 gap-4 2xl:grid-cols-2" data-testid="card-grid">
         {cards.map((c) => (
           <PlotCard key={c.id} card={c} onDismiss={() => onDismiss(c.id)} />

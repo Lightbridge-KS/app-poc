@@ -38,7 +38,7 @@ export function Dashboard() {
   }, [chat.messages, dismissed]);
 
   return (
-    <div className="grid h-screen grid-cols-[380px_1fr] bg-zinc-50 text-zinc-900">
+    <div className="grid h-screen grid-cols-[380px_minmax(0,1fr)] bg-zinc-50 text-zinc-900">
       <ChatRail chat={chat} />
       <CardGrid
         cards={cards}

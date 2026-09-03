@@ -202,21 +202,38 @@ measured (see *Not covered*).
 
 ## ⚠️ Not verified
 
-### Verified by hand, not by automation: the dashboard in a real browser
+### The dashboard driven in a real browser (Chrome automation, 2026-09-03)
 
-Every claim in Evidence was produced over HTTP. The browser step in the evidence plan
-did not run in the build session (the Chrome automation extension returned an error page
-for `localhost` while curl got 200), so it was closed manually: on 2026-09-03 KS opened
-`localhost:3000`, typed prompts into the chat rail, and watched cards render end to end
-after PR #1 merged. That is a human observation, not a recipe — it is recorded here as
-the honest form of the check, and it has no `just` verb behind it.
+Driven through the Claude in Chrome extension against `just dev` on this Mac: clicked the
+suggestion *average mpg by number of cylinders*, then typed *flipper length vs body mass,
+coloured by species* into the chat rail and pressed Enter.
 
-What remains ⚠️ **not verified** is the *automated* form: no script or browser driver has
-asserted the card caption text, the `spec` flip contents, dismiss, or the layout below
-1536 px. To close that gap properly: drive `localhost:3000` with a browser automation
-tool, click the first suggestion, assert the caption
-`Scatter · penguins · flipper_length_mm × body_mass_g by species · 342/344 rows`, flip to
-**spec** and assert the JSON equals Run 2's first row, and save the screenshot next to this README.
+```
+card 1 caption : Bar · mtcars · mean(mpg) by cyl · 32/32 rows
+card 1 → spec  : {"dataset":"mtcars","by":"cyl","measure":{"op":"mean","column":"mpg"}}   ← equals Run 2, row 2
+card 2 caption : Scatter · penguins · flipper_length_mm × body_mass_g by species · 342/344 rows
+console errors : none
+dismiss ✕      : both cards removed → empty state "No cards yet" returned
+```
+
+![two cards after two prompts](docs/screenshot.jpg)
+
+Both captions are the client-derived strings, character for character; the spec flip
+shows the tool input the model produced, with no `title` field. KS had also driven the
+UI by hand earlier the same day, after PR #1 merged.
+
+The first browser pass found two layout bugs no HTTP check could: the card overflowed
+the grid so **spec** and **✕** were clipped off the right edge (a CSS-grid `1fr` track
+lets a Plotly canvas push its column wider — fixed with `minmax(0,1fr)` + `min-w-0`), and
+the legend sat on the x-axis title (fixed with a larger bottom margin). The screenshot
+above is from the second pass, after those fixes.
+
+### ⚠️ Not verified: narrow viewports and multi-plot turns
+
+Nothing below 1163 px wide was looked at, and no prompt asked for two plots in one turn
+(the model may emit two tool calls in one step; the grid would render both, untested).
+To close: `just dev`, resize to a phone width and check the two-column grid degrades;
+ask "show me both mpg by cyl and hp vs wt" and count the cards.
 
 ### ⚠️ Not verified: N=5 is a smoke test, not a statistic
 

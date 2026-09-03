@@ -30,7 +30,7 @@ export function PlotCard({ card, onDismiss }: { card: Card; onDismiss: () => voi
   }, [card]);
 
   return (
-    <section className="rounded-lg border border-zinc-200 bg-white shadow-sm" data-testid="plot-card" data-state={card.state}>
+    <section className="min-w-0 overflow-hidden rounded-lg border border-zinc-200 bg-white shadow-sm" data-testid="plot-card" data-state={card.state}>
       <header className="flex items-center gap-2 border-b border-zinc-100 px-3 py-2">
         <p className="flex-1 truncate font-mono text-[11px] text-zinc-600">
           {card.state === "ready" ? describe(card.output) : card.state === "building" ? "building…" : `✗ ${card.error}`}
