@@ -202,24 +202,21 @@ measured (see *Not covered*).
 
 ## ⚠️ Not verified
 
-### ⚠️ Not verified: the dashboard driven in a real browser
+### Verified by hand, not by automation: the dashboard in a real browser
 
-Every claim above was produced over HTTP: the route streamed the right tool call, the
-right props, and the right computed rows. **Nobody has typed a prompt into the chat rail
-and watched a card appear.** The Chrome automation extension returned an error page for
-`localhost` in this session (curl got 200 from the same URL), so the browser step in the
-evidence plan did not run. `GET /` renders (200, no Turbopack errors after the
-`node:fs` split), and the components compile under strict TypeScript, but the Plotly
-dynamic import, the card flip, dismiss, and the empty-state suggestion buttons are unexercised.
+Every claim in Evidence was produced over HTTP. The browser step in the evidence plan
+did not run in the build session (the Chrome automation extension returned an error page
+for `localhost` while curl got 200), so it was closed manually: on 2026-09-03 KS opened
+`localhost:3000`, typed prompts into the chat rail, and watched cards render end to end
+after PR #1 merged. That is a human observation, not a recipe — it is recorded here as
+the honest form of the check, and it has no `just` verb behind it.
 
-What that does *not* cover: whether the tool part reaches `state === "output-available"`
-in `useChat` the way the route emits it, whether a 344-point Plotly scatter renders at
-the card's 320 px height, and how the two-column layout looks below 1536 px.
-
-To close the gap: `just dev`, open `localhost:3000`, click the first suggestion, confirm a
-scatter card appears with caption `Scatter · penguins · flipper_length_mm × body_mass_g by species · 342/344 rows`,
-click **spec** on the card and confirm the JSON matches Run 2's first row, then re-stamp
-the verified-on line.
+What remains ⚠️ **not verified** is the *automated* form: no script or browser driver has
+asserted the card caption text, the `spec` flip contents, dismiss, or the layout below
+1536 px. To close that gap properly: drive `localhost:3000` with a browser automation
+tool, click the first suggestion, assert the caption
+`Scatter · penguins · flipper_length_mm × body_mass_g by species · 342/344 rows`, flip to
+**spec** and assert the JSON equals Run 2's first row, and save the screenshot next to this README.
 
 ### ⚠️ Not verified: N=5 is a smoke test, not a statistic
 

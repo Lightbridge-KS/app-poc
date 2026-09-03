@@ -19,7 +19,7 @@ PlotSpec → server transforms → Plotly card in a grid.
 - [x] Route + UI: `/api/chat`, ChatRail, CardGrid, PlotCard
 - [x] `just catalog` (JSON Schema of the tools)
 - [x] `just prove`: consistency N=5 per prompt, out-of-catalog refusal
-- [ ] Browser E2E via Chrome automation, screenshot — **blocked 2026-09-03**: extension returned an error page for `localhost`; recorded as the stack's ⚠️ Not verified gap
+- [x] Browser E2E — closed **by hand** 2026-09-03: KS typed prompts and watched cards render after PR #1 merged. Automated form still open (extension returned an error page for `localhost` in the build session); stays in the stack's ⚠️ Not verified.
 - [x] Docs: stack README (contract), design doc, root README + PROOF rows, AGENTS.md amendments, excalidraw retrofit
 - [x] PR — https://github.com/Lightbridge-KS/app-poc/pull/1 (draft, `b136775`)
 
