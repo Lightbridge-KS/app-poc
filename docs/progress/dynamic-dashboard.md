@@ -35,9 +35,20 @@ YAML fills the same PlotSpec; Shiny for Python + Plotly renders; no LLM.
 - [x] Docs: README, design doc (Card vs PlotSpec), root README + PROOF rows
 - [x] PR — https://github.com/Lightbridge-KS/app-poc/pull/2 (draft)
 
+## Now: `genui-controlled-shiny` (2026-09-03)
+
+Chat pane on the Python catalog; grid seeded from cards.yaml; chatlas tool calls.
+
+- [x] Scaffold (uv, Shiny 1.7, chatlas 0.22, openai 3.7) + catalog copied from config-driven-shiny
+- [x] `agent.py`: PlotSpec adapters → OpenAI-shaped tool schema; `strict=False`; direct tool registration
+- [x] `dashboard.py`: seed + chat; cards synced on stream success; missing key is a message
+- [x] `just check` 6/6 · `just prove` run A + run B pasted · browser pass, two screenshots
+- [x] Docs: README, design doc (measured table), root README + PROOF rows, sketch
+- [x] PR — https://github.com/Lightbridge-KS/app-poc/pull/3 (draft)
+
 ## Next
 
-- `genui-controlled-shiny`: Shiny for Python + chatlas, Pydantic PlotSpec, same catalog.
+- "Save this dashboard": write chat cards back to cards.yaml (closes the loop between the two fillers).
 
 ## Deferred
 
@@ -47,6 +58,7 @@ YAML fills the same PlotSpec; Shiny for Python + Plotly renders; no LLM.
 
 ## Confirmed contracts
 
+- **SDK defaults are part of the contract's environment.** chatlas `strict=True` + OpenAI strict mode reject the union-at-root the AI SDK sends non-strict. Record the SDK's default with the schema.
 - **Card ≠ PlotSpec.** The PlotSpec is the cross-stack contract (no free text); a Card adds what the filler is trusted with (`kind`, and `title` for humans). Compare PlotSpecs across stacks, never Cards.
 - **HTTP evidence cannot see layout.** The browser pass found a CSS-grid overflow (Plotly canvas widening a `1fr` track) and a legend/axis collision that `just prove` was blind to. Every dashboard stack needs one browser pass.
 

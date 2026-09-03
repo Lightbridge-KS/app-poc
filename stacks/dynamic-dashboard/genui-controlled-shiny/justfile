@@ -1,0 +1,47 @@
+default:
+    @just --list --unsorted
+
+# Install the locked environment (Python 3.13, uv).
+setup:
+    uv sync --frozen
+
+# Dev server on :8000. Needs OPENAI_API_KEY in .env (copy .env.example).
+dev:
+    uv run shiny run --reload --port 8000 app/dashboard.py
+
+# Hermetic gate: lint, format, tool-schema vocabulary vs the nextjs catalog, tool behaviour, seed. No model.
+check:
+    uv run ruff check .
+    uv run ruff format --check .
+    uv run pytest -q
+
+# Evidence: consistency ×N per intent, refusal, cross-stack spec equality. Costs tokens.
+prove n='5':
+    uv run python scripts/prove.py {{ n }}
+
+# The app is up: GET / is 200 and Plotly's JS is served from the package, not a CDN.
+smoke:
+    @printf 'GET /                     -> '
+    @curl -sS -o /dev/null -w '%{http_code}\n' http://localhost:8000/
+    @printf 'GET /plotly/plotly.min.js -> '
+    @curl -sS -o /dev/null -w '%{http_code} (%{size_download} bytes, local)\n' http://localhost:8000/plotly/plotly.min.js
+
+# The tool schemas exactly as chatlas sends them to the model.
+catalog:
+    uv run python -c "import json, sys; sys.path.insert(0, '.'); from app.agent import make_tools; print(json.dumps([t.schema for t in make_tools([])], indent=2))"
+
+# Refresh the vendored nextjs fixtures (catalog, Run-2 specs, prompts).
+fixtures:
+    cd ../genui-controlled-nextjs && just catalog > ../genui-controlled-shiny/fixtures/nextjs-catalog.json
+    cp ../config-driven-shiny/fixtures/specs.json fixtures/nextjs-run2-specs.json
+    cp ../genui-controlled-nextjs/scripts/prompts.json fixtures/prompts.json
+
+# Regenerate the vendored CSVs: penguins from dash-docker, mtcars from R's datasets.
+data:
+    cp ../../dash-docker/app/data/penguins.csv data/penguins.csv
+    Rscript -e 'write.csv(cbind(model = rownames(mtcars), mtcars), "data/mtcars.csv", row.names = FALSE)'
+    @wc -l data/*.csv
+
+# Remove the environment and caches.
+clean:
+    rm -rf .venv .pytest_cache .ruff_cache

@@ -1,0 +1,34 @@
+[project]
+name = "genui-controlled-shiny"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "chatlas>=0.22.0",
+    "openai>=3.7.0",
+    "plotly>=7.0.0",
+    "polars>=1.44.1",
+    "pydantic>=2.13.5",
+    "python-dotenv>=1.2.3",
+    "pyyaml>=6.0.3",
+    "shiny>=1.7.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.5",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+"app/agent.py" = ["E501"]  # SYSTEM_PROMPT is a verbatim port of the nextjs prompt; keep its lines intact
