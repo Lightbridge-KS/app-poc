@@ -1,0 +1,40 @@
+{
+  "name": "genui-controlled-nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "check": "tsc --noEmit && eslint && node --import tsx scripts/selfcheck.ts",
+    "//check": "tsc --noEmit is enough here (single tsconfig, no project references); scripts/ is in tsconfig include so the prove/catalog scripts are type-checked too.",
+    "catalog": "node --import tsx scripts/catalog.ts",
+    "prove": "node --import tsx scripts/prove.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "4.0.57",
+    "@ai-sdk/react": "4.0.94",
+    "ai": "7.0.91",
+    "next": "16.3.4",
+    "plotly.js-dist-min": "4.0.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "react-plotly.js": "4.1.0",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/plotly.js": "3.0.13",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/react-plotly.js": "2.6.4",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.4",
+    "tailwindcss": "^4",
+    "tsx": "4.23.13",
+    "typescript": "^5"
+  },
+  "packageManager": "pnpm@10.18.2"
+}

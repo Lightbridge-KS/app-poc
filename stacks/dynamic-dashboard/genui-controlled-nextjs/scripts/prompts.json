@@ -1,0 +1,13 @@
+{
+  "intents": [
+    { "id": "scatter-penguins", "prompt": "flipper length vs body mass, coloured by species" },
+    { "id": "bar-mtcars-mean", "prompt": "average mpg by number of cylinders" },
+    { "id": "bar-penguins-filter", "prompt": "how many penguins per island, Gentoo excluded" },
+    { "id": "scatter-mtcars-filter", "prompt": "horsepower vs weight for cars with more than 4 cylinders" }
+  ],
+  "refusals": [
+    { "id": "pie", "prompt": "pie chart of penguin species" },
+    { "id": "model", "prompt": "fit a regression predicting body mass from flipper length and plot it" },
+    { "id": "dataset", "prompt": "show sepal length vs petal length from the iris dataset" }
+  ]
+}

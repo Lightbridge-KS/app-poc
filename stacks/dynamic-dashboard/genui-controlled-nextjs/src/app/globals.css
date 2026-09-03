@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Light only, system fonts, no font CDN: the plots are the point, not the chrome. */
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
