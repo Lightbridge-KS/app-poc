@@ -1,0 +1,33 @@
+# Deliberately wrong, one mistake per card. `just prove` shows what each one teaches.
+title: Broken on purpose
+columns: 2
+cards:
+  - kind: scatter            # unknown column
+    dataset: mtcars
+    x: weight
+    y: hp
+
+  - kind: pie                # unsupported chart kind
+    dataset: penguins
+    by: species
+
+  - kind: bar                # numeric column where a category is required
+    dataset: penguins
+    by: body_mass_g
+    measure: { op: count }
+
+  - kind: bar                # too many filters
+    dataset: mtcars
+    by: cyl
+    measure: { op: mean, column: mpg }
+    filter:
+      - { column: am, op: "==", value: 1 }
+      - { column: vs, op: "==", value: 0 }
+      - { column: gear, op: ">", value: 3 }
+      - { column: carb, op: "<", value: 4 }
+
+  - kind: scatter            # this one is fine — it must still render
+    dataset: penguins
+    x: bill_length_mm
+    y: bill_depth_mm
+    color: species

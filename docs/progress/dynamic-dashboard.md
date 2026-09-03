@@ -23,9 +23,20 @@ PlotSpec → server transforms → Plotly card in a grid.
 - [x] Docs: stack README (contract), design doc, root README + PROOF rows, AGENTS.md amendments, excalidraw retrofit
 - [x] PR — https://github.com/Lightbridge-KS/app-poc/pull/1 (draft, `b136775`)
 
+## Now: `config-driven-shiny` (2026-09-03)
+
+YAML fills the same PlotSpec; Shiny for Python + Plotly renders; no LLM.
+
+- [x] Scaffold (uv, Python 3.13, Shiny 1.7, Plotly 7, Pydantic 2.13, polars 1.44) + data
+- [x] Catalog port: datasets, Pydantic schema, polars transform, build — key-for-key with the TS output
+- [x] Fixtures vendored from nextjs (`just fixtures` added there) · `just check` 13/13 · `just prove` all ✓
+- [x] Shiny app: file_reader, per-card validation, error cards, Plotly from package
+- [x] Browser pass: four cards, live reload in 3 s, error card in place; three screenshots in `docs/`
+- [x] Docs: README, design doc (Card vs PlotSpec), root README + PROOF rows
+- [x] PR — https://github.com/Lightbridge-KS/app-poc/pull/2 (draft)
+
 ## Next
 
-- `config-driven` variant: a YAML file fills the same PlotSpec; no LLM. Reuses `src/catalog/*` shape.
 - `genui-controlled-shiny`: Shiny for Python + chatlas, Pydantic PlotSpec, same catalog.
 
 ## Deferred
@@ -36,6 +47,7 @@ PlotSpec → server transforms → Plotly card in a grid.
 
 ## Confirmed contracts
 
+- **Card ≠ PlotSpec.** The PlotSpec is the cross-stack contract (no free text); a Card adds what the filler is trusted with (`kind`, and `title` for humans). Compare PlotSpecs across stacks, never Cards.
 - **HTTP evidence cannot see layout.** The browser pass found a CSS-grid overflow (Plotly canvas widening a `1fr` track) and a legend/axis collision that `just prove` was blind to. Every dashboard stack needs one browser pass.
 
 - **No free-text prop in a PlotSpec.** Run 1 of `just prove` (2026-09-03): with an optional `title`, it was the only field that drifted (2/4 intents). Run 2 without it: 20/20 identical. Copy is derived from the spec on the client.

@@ -1,0 +1,47 @@
+default:
+    @just --list --unsorted
+
+# Install the locked environment (Python 3.13, uv).
+setup:
+    uv sync --frozen
+
+# Dev server on :8000; edits to cards.yaml show within a second, edits to app/ reload.
+dev:
+    uv run shiny run --reload --port 8000 app/dashboard.py
+
+# Hermetic gate: lint, format, and the three evidence tests (equivalence, contract, errors). No server.
+check:
+    uv run ruff check .
+    uv run ruff format --check .
+    uv run pytest -q
+
+# The evidence, as markdown for the README. Hermetic — no server, no model, no tokens.
+prove:
+    uv run python scripts/prove.py
+
+# The app is up: GET / is 200 and Plotly's JS is served from the package, not a CDN.
+smoke:
+    @printf 'GET /                     -> '
+    @curl -sS -o /dev/null -w '%{http_code}\n' http://localhost:8000/
+    @printf 'GET /plotly/plotly.min.js -> '
+    @curl -sS -o /dev/null -w '%{http_code} (%{size_download} bytes, local)\n' http://localhost:8000/plotly/plotly.min.js
+
+# The contract as JSON Schema, from Pydantic — compare with the nextjs stack's `just catalog`.
+catalog:
+    uv run python -c "import json, sys; sys.path.insert(0, '.'); from app.catalog.schema import ScatterSpecAdapter, BarSpecAdapter; print(json.dumps([{'name': 'scatter_plot', 'inputSchema': ScatterSpecAdapter.json_schema()}, {'name': 'bar_plot', 'inputSchema': BarSpecAdapter.json_schema()}], indent=2))"
+
+# Refresh the vendored fixtures from the nextjs stack (its `just fixtures` and `just catalog`).
+fixtures:
+    cd ../genui-controlled-nextjs && just fixtures ../config-driven-shiny/fixtures/specs.json > ../config-driven-shiny/fixtures/nextjs-outputs.json
+    cd ../genui-controlled-nextjs && just catalog > ../config-driven-shiny/fixtures/nextjs-catalog.json
+    @ls -la fixtures/
+
+# Regenerate the vendored CSVs: penguins from dash-docker, mtcars from R's datasets.
+data:
+    cp ../../dash-docker/app/data/penguins.csv data/penguins.csv
+    Rscript -e 'write.csv(cbind(model = rownames(mtcars), mtcars), "data/mtcars.csv", row.names = FALSE)'
+    @wc -l data/*.csv
+
+# Remove the environment and caches.
+clean:
+    rm -rf .venv .pytest_cache .ruff_cache
