@@ -15,6 +15,7 @@ what still isn't verified.
 | [`stacks/shiny-docker`](stacks/shiny-docker) | Shiny for Python under Docker Compose — a stateful WebSocket app | ✅ works · 863 MB · in-process sessions, so sticky sessions are required behind a LB | 2026-08-14 |
 | [`stacks/dash-docker`](stacks/dash-docker) | The same dashboard on Plotly Dash — does it scale statelessly? | ✅ works · 500 MB · 4 gunicorn workers, one identical answer, no stickiness | 2026-08-14 |
 | [`stacks/pydantic-openapi-react`](stacks/pydantic-openapi-react) | Can Pydantic models *be* the API contract, with TypeScript generated downstream? | ✅ schema drift becomes a compile error · 2 gotchas found in the source doc | 2026-08-14 † |
+| [`stacks/dynamic-dashboard/genui-controlled-nextjs`](stacks/dynamic-dashboard/genui-controlled-nextjs) | Can an LLM drive a *Controlled-tier* generative UI — pick a prebuilt plot, fill typed props — consistently enough to trust? | ✅ works · tool choice 20/20 · props 20/20 identical once the one free-text prop was removed · 3/3 out-of-catalog prompts refused | 2026-09-03 |
 
 † Inferred from the working session — this stack's README carries no
 verified-on line yet. Stamp one on its next pass.
@@ -74,6 +75,15 @@ just down
 Recipe vocabulary is shared where the lifecycle is shared (`build up smoke dev
 down`) and stack-specific where it isn't — `pydantic-openapi-react` has no
 container to start, so its verbs are `setup gen check gate drift-demo`.
+
+## The dynamic-dashboard family
+
+`stacks/dynamic-dashboard/` is the first *family*: several stacks answering variants of
+one question — where should the control/flexibility cutpoint sit between an LLM (or a
+config file) and the plots on a dashboard? Everything is held constant except who fills
+the typed `PlotSpec`. The family design lives in
+[`docs/design/dynamic-dashboard.md`](docs/design/dynamic-dashboard.md), the tracker in
+[`docs/progress/dynamic-dashboard.md`](docs/progress/dynamic-dashboard.md).
 
 ## Conventions
 

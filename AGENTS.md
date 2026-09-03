@@ -15,6 +15,10 @@ that stack's `justfile`. If there is no recipe, there is no claim.
 
 - One stack per `stacks/<stack-name>/` directory; stacks never import from each
   other and never share a virtualenv, image, or lockfile.
+- One level of grouping is allowed when several stacks answer variants of one
+  question: `stacks/<family>/<stack-name>/` (`stacks/dynamic-dashboard/genui-controlled-nextjs`).
+  The leaf is the stack; every per-stack invariant applies to it unchanged. The
+  family dir holds nothing but stacks — shared prose goes to `docs/`.
 - Every stack carries: `README.md` (the section contract below), `justfile`
   (the front door), and its own environment manifest — `pyproject.toml` +
   `uv.lock` for Python, `package.json` + lockfile for Node.
@@ -69,10 +73,15 @@ genuinely inapplicable; they may not be silently omitted.
 ## Docs
 
 - Stack-specific docs live inside the stack (`stacks/pydantic-openapi-react/docs/`).
-- No root `docs/` yet. The candidate for promotion is the container-lessons
-  list duplicated between `shiny-docker` and `dash-docker`; it stays duplicated
-  until a third containerized stack makes deduplication worth the indirection.
-  Each stack README must stand alone when reached by a direct link.
+- Root `docs/` holds what spans stacks, by lifecycle: `docs/design/` (settled
+  family-level design, e.g. the generative-UI tiers shared by every
+  `dynamic-dashboard` stack), `docs/progress/` (one tracker per family or
+  effort), `docs/ideas/` (fog: sketches and directions not yet phraseable as an
+  issue). Nothing in `docs/` restates a stack README; each stack README must
+  still stand alone when reached by a direct link.
+- The container-lessons list duplicated between `shiny-docker` and
+  `dash-docker` stays duplicated until a third containerized stack makes
+  deduplication worth the indirection.
 
 ## Adding a new stack
 

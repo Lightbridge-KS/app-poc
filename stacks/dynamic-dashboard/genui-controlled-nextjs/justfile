@@ -1,0 +1,46 @@
+default:
+    @just --list --unsorted
+
+# Install pinned deps (pnpm). Node ≥ 22 required.
+setup:
+    pnpm install --frozen-lockfile
+
+# Dev server on :3000 with hot reload. Needs OPENAI_API_KEY in .env (copy .env.example).
+dev:
+    pnpm dev
+
+# Production build compiles: types, routes, client bundle.
+build:
+    pnpm build
+
+# Hermetic gate: types, lint, and the transform self-checks against known dataset facts. No LLM.
+check:
+    pnpm exec tsc --noEmit
+    pnpm lint
+    node --import tsx scripts/selfcheck.ts
+
+# Regenerate the vendored CSVs: penguins from dash-docker, mtcars from R's datasets.
+data:
+    cp ../../dash-docker/app/data/penguins.csv data/penguins.csv
+    Rscript -e 'write.csv(cbind(model = rownames(mtcars), mtcars), "data/mtcars.csv", row.names = FALSE)'
+    @wc -l data/*.csv
+
+# The catalog contract exactly as the model receives it: tool names, descriptions, JSON Schema.
+catalog:
+    node --import tsx scripts/catalog.ts
+
+# The app is up: GET / is 200 and POST /api/chat answers with a UI message stream.
+smoke:
+    @printf 'GET  /          -> '
+    @curl -sS -o /dev/null -w '%{http_code}\n' http://localhost:3000/
+    @printf 'POST /api/chat  -> '
+    @curl -sS -o /dev/null -w '%{http_code} %{content_type}\n' -H 'content-type: application/json' \
+        -d '{"messages":[{"id":"u1","role":"user","parts":[{"type":"text","text":"hi"}]}]}' http://localhost:3000/api/chat
+
+# Evidence, against the running server: N=5 consistency per intent + out-of-catalog refusal. Costs tokens.
+prove n='5':
+    PROVE_N={{ n }} node --import tsx scripts/prove.ts
+
+# Remove build output and deps.
+clean:
+    rm -rf .next node_modules
