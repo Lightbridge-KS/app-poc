@@ -1,0 +1,35 @@
+# The dashboard, declared. Edit this file while `just dev` runs and the page follows.
+#
+# Each card is a PlotSpec — the same contract the LLM filled in genui-controlled-nextjs —
+# plus `kind` (which builder) and an optional `title` (copy a person writes is allowed).
+# Columns are enums: an unknown column is an error card, not a guess. See `just catalog`.
+
+title: Penguins and cars
+columns: 2
+
+cards:
+  - kind: scatter
+    dataset: penguins
+    x: flipper_length_mm
+    y: body_mass_g
+    color: species
+
+  - kind: bar
+    dataset: mtcars
+    by: cyl
+    measure: { op: mean, column: mpg }
+    title: Fuel economy by cylinders
+
+  - kind: bar
+    dataset: penguins
+    by: island
+    measure: { op: count }
+    filter:
+      - { column: species, op: "!=", value: Gentoo }
+
+  - kind: scatter
+    dataset: mtcars
+    x: wt
+    y: hp
+    filter:
+      - { column: cyl, op: ">", value: 4 }

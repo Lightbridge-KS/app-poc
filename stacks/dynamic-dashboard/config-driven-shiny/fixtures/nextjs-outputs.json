@@ -1,0 +1,2304 @@
+[
+  {
+    "kind": "scatter",
+    "spec": {
+      "dataset": "penguins",
+      "x": "flipper_length_mm",
+      "y": "body_mass_g",
+      "color": "species"
+    },
+    "points": [
+      {
+        "x": 181,
+        "y": 3750,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 186,
+        "y": 3800,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 3250,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 3450,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3650,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 181,
+        "y": 3625,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 4675,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 3475,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 4250,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 186,
+        "y": 3300,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 180,
+        "y": 3700,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 182,
+        "y": 3200,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 3800,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 198,
+        "y": 4400,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 185,
+        "y": 3700,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 3450,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 197,
+        "y": 4500,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 184,
+        "y": 3325,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 194,
+        "y": 4200,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 174,
+        "y": 3400,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 180,
+        "y": 3600,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 189,
+        "y": 3800,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 185,
+        "y": 3950,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 180,
+        "y": 3800,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3800,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 183,
+        "y": 3550,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3200,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 172,
+        "y": 3150,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 180,
+        "y": 3950,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 178,
+        "y": 3250,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 178,
+        "y": 3900,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 188,
+        "y": 3300,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 184,
+        "y": 3900,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 3325,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 196,
+        "y": 4150,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3950,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 180,
+        "y": 3550,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 181,
+        "y": 3300,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 184,
+        "y": 4650,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 182,
+        "y": 3150,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 3900,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 186,
+        "y": 3100,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 196,
+        "y": 4400,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 185,
+        "y": 3000,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 4600,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 182,
+        "y": 3425,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 179,
+        "y": 2975,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3450,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 4150,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 186,
+        "y": 3500,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 188,
+        "y": 4300,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3450,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 200,
+        "y": 4050,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 2900,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 3700,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 186,
+        "y": 3550,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 3800,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 181,
+        "y": 2850,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 194,
+        "y": 3750,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 185,
+        "y": 3150,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 4400,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 185,
+        "y": 3600,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 192,
+        "y": 4050,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 184,
+        "y": 2850,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 192,
+        "y": 3950,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 3350,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 188,
+        "y": 4100,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3050,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 198,
+        "y": 4450,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3600,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3900,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 196,
+        "y": 3550,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 197,
+        "y": 4150,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3700,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 4250,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 3700,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 184,
+        "y": 3900,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3550,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 4000,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 189,
+        "y": 3200,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 196,
+        "y": 4700,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3800,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 4200,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 3350,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 194,
+        "y": 3550,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3800,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 189,
+        "y": 3500,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 189,
+        "y": 3950,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3600,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 202,
+        "y": 3550,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 205,
+        "y": 4300,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 185,
+        "y": 3400,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 186,
+        "y": 4450,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3300,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 208,
+        "y": 4300,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3700,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 196,
+        "y": 4350,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 178,
+        "y": 2900,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 192,
+        "y": 4100,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 192,
+        "y": 3725,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 203,
+        "y": 4725,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 183,
+        "y": 3075,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 4250,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 2925,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 184,
+        "y": 3550,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 199,
+        "y": 3750,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3900,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 181,
+        "y": 3175,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 197,
+        "y": 4775,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 198,
+        "y": 3825,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 4600,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 3200,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 197,
+        "y": 4275,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 3900,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 196,
+        "y": 4075,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 188,
+        "y": 2900,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 199,
+        "y": 3775,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 189,
+        "y": 3350,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 189,
+        "y": 3325,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3150,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 198,
+        "y": 3500,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 176,
+        "y": 3450,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 202,
+        "y": 3875,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 186,
+        "y": 3050,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 199,
+        "y": 4000,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 3275,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 4300,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 3050,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4000,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3325,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 197,
+        "y": 3500,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 3500,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 199,
+        "y": 4475,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3425,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3900,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 3175,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 200,
+        "y": 3975,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 185,
+        "y": 3400,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 4250,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 3400,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3475,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 188,
+        "y": 3050,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3725,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 192,
+        "y": 3000,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 185,
+        "y": 3650,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 4250,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 184,
+        "y": 3475,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 3450,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 3750,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3700,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 201,
+        "y": 4000,
+        "color": "Adelie",
+        "label": null
+      },
+      {
+        "x": 211,
+        "y": 4500,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 230,
+        "y": 5700,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4450,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 218,
+        "y": 5700,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 215,
+        "y": 5400,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4550,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 211,
+        "y": 4800,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 219,
+        "y": 5200,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 209,
+        "y": 4400,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 215,
+        "y": 5150,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 214,
+        "y": 4650,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 216,
+        "y": 5550,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 214,
+        "y": 4650,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 213,
+        "y": 5850,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4200,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 217,
+        "y": 5850,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4150,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 221,
+        "y": 6300,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 209,
+        "y": 4800,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 222,
+        "y": 5350,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 218,
+        "y": 5700,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 215,
+        "y": 5000,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 213,
+        "y": 4400,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 215,
+        "y": 5050,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 215,
+        "y": 5000,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 215,
+        "y": 5100,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 216,
+        "y": 4100,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 215,
+        "y": 5650,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4600,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 220,
+        "y": 5550,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 222,
+        "y": 5250,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 209,
+        "y": 4700,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 207,
+        "y": 5050,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 230,
+        "y": 6050,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 220,
+        "y": 5150,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 220,
+        "y": 5400,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 213,
+        "y": 4950,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 219,
+        "y": 5250,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 208,
+        "y": 4350,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 208,
+        "y": 5350,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 208,
+        "y": 3950,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 225,
+        "y": 5700,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4300,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 216,
+        "y": 4750,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 222,
+        "y": 5550,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 217,
+        "y": 4900,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4200,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 225,
+        "y": 5400,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 213,
+        "y": 5100,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 215,
+        "y": 5300,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4850,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 220,
+        "y": 5300,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4400,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 225,
+        "y": 5000,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 217,
+        "y": 4900,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 220,
+        "y": 5050,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 208,
+        "y": 4300,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 220,
+        "y": 5000,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 208,
+        "y": 4450,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 224,
+        "y": 5550,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 208,
+        "y": 4200,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 221,
+        "y": 5300,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 214,
+        "y": 4400,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 231,
+        "y": 5650,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 219,
+        "y": 4700,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 230,
+        "y": 5700,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 214,
+        "y": 4650,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 229,
+        "y": 5800,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 220,
+        "y": 4700,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 223,
+        "y": 5550,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 216,
+        "y": 4750,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 221,
+        "y": 5000,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 221,
+        "y": 5100,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 217,
+        "y": 5200,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 216,
+        "y": 4700,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 230,
+        "y": 5800,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 209,
+        "y": 4600,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 220,
+        "y": 6000,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 215,
+        "y": 4750,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 223,
+        "y": 5950,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 212,
+        "y": 4625,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 221,
+        "y": 5450,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 212,
+        "y": 4725,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 224,
+        "y": 5350,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 212,
+        "y": 4750,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 228,
+        "y": 5600,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 218,
+        "y": 4600,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 218,
+        "y": 5300,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 212,
+        "y": 4875,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 230,
+        "y": 5550,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 218,
+        "y": 4950,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 228,
+        "y": 5400,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 212,
+        "y": 4750,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 224,
+        "y": 5650,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 214,
+        "y": 4850,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 226,
+        "y": 5200,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 216,
+        "y": 4925,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 222,
+        "y": 4875,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 203,
+        "y": 4625,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 225,
+        "y": 5250,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 219,
+        "y": 4850,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 228,
+        "y": 5600,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 215,
+        "y": 4975,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 228,
+        "y": 5500,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 216,
+        "y": 4725,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 215,
+        "y": 5500,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4700,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 219,
+        "y": 5500,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 208,
+        "y": 4575,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 209,
+        "y": 5500,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 216,
+        "y": 5000,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 229,
+        "y": 5950,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 213,
+        "y": 4650,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 230,
+        "y": 5500,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 217,
+        "y": 4375,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 230,
+        "y": 5850,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 217,
+        "y": 4875,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 222,
+        "y": 6000,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 214,
+        "y": 4925,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 215,
+        "y": 4850,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 222,
+        "y": 5750,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 212,
+        "y": 5200,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 213,
+        "y": 5400,
+        "color": "Gentoo",
+        "label": null
+      },
+      {
+        "x": 192,
+        "y": 3500,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 196,
+        "y": 3900,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 3650,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 188,
+        "y": 3525,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 197,
+        "y": 3725,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 198,
+        "y": 3950,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 178,
+        "y": 3250,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 197,
+        "y": 3750,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 4150,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 198,
+        "y": 3700,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 3800,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 194,
+        "y": 3775,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 185,
+        "y": 3700,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 201,
+        "y": 4050,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3575,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 201,
+        "y": 4050,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 197,
+        "y": 3300,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 181,
+        "y": 3700,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3450,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 4400,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 181,
+        "y": 3600,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 3400,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 2900,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 3800,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 3300,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 197,
+        "y": 4150,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 200,
+        "y": 3400,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 200,
+        "y": 3800,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 3700,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 205,
+        "y": 4550,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3200,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 201,
+        "y": 4300,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3350,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 203,
+        "y": 4100,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 3600,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 199,
+        "y": 3900,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 3850,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4800,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 192,
+        "y": 2700,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 205,
+        "y": 4500,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 3950,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3650,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 196,
+        "y": 3550,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 196,
+        "y": 3500,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 196,
+        "y": 3675,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 201,
+        "y": 4450,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 190,
+        "y": 3400,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 212,
+        "y": 4300,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3250,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 198,
+        "y": 3675,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 199,
+        "y": 3325,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 201,
+        "y": 3950,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 3600,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 203,
+        "y": 4050,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 187,
+        "y": 3350,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 197,
+        "y": 3450,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 191,
+        "y": 3250,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 203,
+        "y": 4050,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 202,
+        "y": 3800,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 194,
+        "y": 3525,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 206,
+        "y": 3950,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 189,
+        "y": 3650,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 195,
+        "y": 3650,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 207,
+        "y": 4000,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 202,
+        "y": 3400,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 193,
+        "y": 3775,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 210,
+        "y": 4100,
+        "color": "Chinstrap",
+        "label": null
+      },
+      {
+        "x": 198,
+        "y": 3775,
+        "color": "Chinstrap",
+        "label": null
+      }
+    ],
+    "meta": {
+      "n_used": 342,
+      "n_total": 344,
+      "n_filtered": 344,
+      "n_dropped": 2
+    },
+    "summary": "Rendered scatter of penguins: flipper_length_mm × body_mass_g by species, 342/344 rows."
+  },
+  {
+    "kind": "bar",
+    "spec": {
+      "dataset": "mtcars",
+      "by": "cyl",
+      "measure": {
+        "op": "mean",
+        "column": "mpg"
+      }
+    },
+    "bars": [
+      {
+        "category": "4",
+        "group": null,
+        "n": 11,
+        "value": 26.663636363636364
+      },
+      {
+        "category": "6",
+        "group": null,
+        "n": 7,
+        "value": 19.74285714285714
+      },
+      {
+        "category": "8",
+        "group": null,
+        "n": 14,
+        "value": 15.100000000000003
+      }
+    ],
+    "meta": {
+      "n_used": 32,
+      "n_total": 32,
+      "n_filtered": 32,
+      "n_dropped": 0
+    },
+    "summary": "Rendered bar of mtcars: mean mpg by cyl, 3 bars from 32/32 rows."
+  },
+  {
+    "kind": "bar",
+    "spec": {
+      "dataset": "penguins",
+      "by": "island",
+      "measure": {
+        "op": "count"
+      },
+      "filter": [
+        {
+          "column": "species",
+          "op": "!=",
+          "value": "Gentoo"
+        }
+      ]
+    },
+    "bars": [
+      {
+        "category": "Biscoe",
+        "group": null,
+        "n": 44,
+        "value": 44
+      },
+      {
+        "category": "Dream",
+        "group": null,
+        "n": 124,
+        "value": 124
+      },
+      {
+        "category": "Torgersen",
+        "group": null,
+        "n": 52,
+        "value": 52
+      }
+    ],
+    "meta": {
+      "n_used": 220,
+      "n_total": 344,
+      "n_filtered": 220,
+      "n_dropped": 0
+    },
+    "summary": "Rendered bar of penguins: count by island, 3 bars from 220/344 rows."
+  },
+  {
+    "kind": "scatter",
+    "spec": {
+      "dataset": "mtcars",
+      "x": "wt",
+      "y": "hp",
+      "filter": [
+        {
+          "column": "cyl",
+          "op": ">",
+          "value": 4
+        }
+      ]
+    },
+    "points": [
+      {
+        "x": 2.62,
+        "y": 110,
+        "color": null,
+        "label": "Mazda RX4"
+      },
+      {
+        "x": 2.875,
+        "y": 110,
+        "color": null,
+        "label": "Mazda RX4 Wag"
+      },
+      {
+        "x": 3.215,
+        "y": 110,
+        "color": null,
+        "label": "Hornet 4 Drive"
+      },
+      {
+        "x": 3.44,
+        "y": 175,
+        "color": null,
+        "label": "Hornet Sportabout"
+      },
+      {
+        "x": 3.46,
+        "y": 105,
+        "color": null,
+        "label": "Valiant"
+      },
+      {
+        "x": 3.57,
+        "y": 245,
+        "color": null,
+        "label": "Duster 360"
+      },
+      {
+        "x": 3.44,
+        "y": 123,
+        "color": null,
+        "label": "Merc 280"
+      },
+      {
+        "x": 3.44,
+        "y": 123,
+        "color": null,
+        "label": "Merc 280C"
+      },
+      {
+        "x": 4.07,
+        "y": 180,
+        "color": null,
+        "label": "Merc 450SE"
+      },
+      {
+        "x": 3.73,
+        "y": 180,
+        "color": null,
+        "label": "Merc 450SL"
+      },
+      {
+        "x": 3.78,
+        "y": 180,
+        "color": null,
+        "label": "Merc 450SLC"
+      },
+      {
+        "x": 5.25,
+        "y": 205,
+        "color": null,
+        "label": "Cadillac Fleetwood"
+      },
+      {
+        "x": 5.424,
+        "y": 215,
+        "color": null,
+        "label": "Lincoln Continental"
+      },
+      {
+        "x": 5.345,
+        "y": 230,
+        "color": null,
+        "label": "Chrysler Imperial"
+      },
+      {
+        "x": 3.52,
+        "y": 150,
+        "color": null,
+        "label": "Dodge Challenger"
+      },
+      {
+        "x": 3.435,
+        "y": 150,
+        "color": null,
+        "label": "AMC Javelin"
+      },
+      {
+        "x": 3.84,
+        "y": 245,
+        "color": null,
+        "label": "Camaro Z28"
+      },
+      {
+        "x": 3.845,
+        "y": 175,
+        "color": null,
+        "label": "Pontiac Firebird"
+      },
+      {
+        "x": 3.17,
+        "y": 264,
+        "color": null,
+        "label": "Ford Pantera L"
+      },
+      {
+        "x": 2.77,
+        "y": 175,
+        "color": null,
+        "label": "Ferrari Dino"
+      },
+      {
+        "x": 3.57,
+        "y": 335,
+        "color": null,
+        "label": "Maserati Bora"
+      }
+    ],
+    "meta": {
+      "n_used": 21,
+      "n_total": 32,
+      "n_filtered": 21,
+      "n_dropped": 0
+    },
+    "summary": "Rendered scatter of mtcars: wt × hp, 21/32 rows."
+  }
+]

@@ -16,6 +16,7 @@ what still isn't verified.
 | [`stacks/dash-docker`](stacks/dash-docker) | The same dashboard on Plotly Dash — does it scale statelessly? | ✅ works · 500 MB · 4 gunicorn workers, one identical answer, no stickiness | 2026-08-14 |
 | [`stacks/pydantic-openapi-react`](stacks/pydantic-openapi-react) | Can Pydantic models *be* the API contract, with TypeScript generated downstream? | ✅ schema drift becomes a compile error · 2 gotchas found in the source doc | 2026-08-14 † |
 | [`stacks/dynamic-dashboard/genui-controlled-nextjs`](stacks/dynamic-dashboard/genui-controlled-nextjs) | Can an LLM drive a *Controlled-tier* generative UI — pick a prebuilt plot, fill typed props — consistently enough to trust? | ✅ works · tool choice 20/20 · props 20/20 identical once the one free-text prop was removed · 3/3 out-of-catalog prompts refused | 2026-09-03 |
+| [`stacks/dynamic-dashboard/config-driven-shiny`](stacks/dynamic-dashboard/config-driven-shiny) | The same PlotSpec filled by a YAML file instead of a model — same result, in a second language? | ✅ works · 4/4 outputs equal the nextjs stack's · Pydantic ≡ Zod vocabulary · bad cards fail in place, live reload in 3 s | 2026-09-03 |
 
 † Inferred from the working session — this stack's README carries no
 verified-on line yet. Stamp one on its next pass.

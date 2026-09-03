@@ -21,7 +21,7 @@ determinism, safety, and expressiveness?
                     ┌────┴──────────────────────────┐
                     │ LLM tool call   genui-controlled-nextjs  (built)
                     │ LLM tool call   genui-controlled-shiny   (planned)
-                    │ YAML file       config-driven            (planned)
+                    │ YAML file       config-driven-shiny      (built)
                     │ layout JSON     declarative tier         (deferred)
                     └───────────────────────────────┘
 ```
@@ -101,10 +101,17 @@ No other slot exists; the model cannot place, size, or reorder anything.
 |---|---|---|---|---|
 | genui-controlled-nextjs | LLM, tool call | whitelisted ops | none | can an LLM drive a Controlled surface *consistently*? |
 | genui-controlled-shiny | LLM, structured output | whitelisted ops | none | same question, Python stack (Pydantic as the contract) |
-| config-driven | YAML file | whitelisted ops | fixed list of cards | is the PlotSpec a good *human* authoring surface with no LLM at all? |
+| config-driven-shiny | YAML file | whitelisted ops | `columns: 1\|2`, card order, human `title` per card | is the PlotSpec a good *human* authoring surface with no LLM at all? **Built**: 4/4 outputs equal the nextjs stack's, Pydantic and Zod vocabularies identical, bad cards fail in place. |
 | declarative (deferred) | LLM, layout JSON | whitelisted ops | templates + slots | how much composition can be handed over before drift bites? |
+
+## Card vs PlotSpec (settled 2026-09-03, config-driven-shiny)
+
+The **PlotSpec** is the contract and carries no free text. A **Card** wraps a PlotSpec with
+what the *filler* is trusted with: `kind` (explicit, since a file has no tool call) and,
+for human fillers only, an optional `title`. The LLM tier never gets `title`; the file
+tier does. The equivalence and contract checks compare PlotSpecs, never Cards.
 
 ## Open questions
 
 - 💡 Refusal as text vs a typed `decline` tool (typed = machine-checkable, but a third catalog entry).
-- 💡 Whether `filter` belongs in the PlotSpec at all for the config-driven variant, or in a separate, reusable "view" object.
+- 💡 Whether `filter` belongs in the PlotSpec at all, or in a separate, reusable "view" object — unchanged by config-driven-shiny; the YAML reads fine with inline filters at four cards.

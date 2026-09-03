@@ -1,0 +1,6 @@
+[
+  { "kind": "scatter", "dataset": "penguins", "x": "flipper_length_mm", "y": "body_mass_g", "color": "species" },
+  { "kind": "bar", "dataset": "mtcars", "by": "cyl", "measure": { "op": "mean", "column": "mpg" } },
+  { "kind": "bar", "dataset": "penguins", "by": "island", "measure": { "op": "count" }, "filter": [{ "column": "species", "op": "!=", "value": "Gentoo" }] },
+  { "kind": "scatter", "dataset": "mtcars", "x": "wt", "y": "hp", "filter": [{ "column": "cyl", "op": ">", "value": 4 }] }
+]

@@ -19,6 +19,7 @@ just dev                 # http://localhost:3000
 just smoke               # GET / and POST /api/chat answer (another shell)
 just catalog             # the contract the model receives, as JSON Schema
 just prove               # consistency ×5 per intent + refusal — costs tokens
+just fixtures specs.json # outputs for a list of specs — what sibling stacks vendor
 ```
 
 `just` alone lists recipes. There is no container: the question here is about the model
@@ -66,6 +67,7 @@ the contract that makes it consistent look like?
 | `src/builders/scatter.ts` · `bar.ts` · `theme.ts` | output → Plotly figure; fixed palette, fixed layout |
 | `scripts/selfcheck.ts` | transform facts asserted without a model |
 | `scripts/catalog.ts` · `prove.ts` · `prompts.json` | the evidence recipes |
+| `scripts/fixtures.ts` | outputs for a JSON list of specs; the `config-driven-shiny` stack vendors the result |
 
 ### Deliberate choices
 
