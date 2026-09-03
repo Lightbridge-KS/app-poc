@@ -33,7 +33,7 @@ YAML fills the same PlotSpec; Shiny for Python + Plotly renders; no LLM.
 - [x] Shiny app: file_reader, per-card validation, error cards, Plotly from package
 - [x] Browser pass: four cards, live reload in 3 s, error card in place; three screenshots in `docs/`
 - [x] Docs: README, design doc (Card vs PlotSpec), root README + PROOF rows
-- [ ] PR
+- [x] PR — https://github.com/Lightbridge-KS/app-poc/pull/2 (draft)
 
 ## Next
 
